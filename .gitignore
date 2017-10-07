@@ -1,3 +1,8 @@
 /logs
 /.data
 .env
+.idea
+www/booksapi/vendor/
+www/booksapi/var/cache/**
+www/booksapi/var/sessions/**
+www/booksapi/var/logs/**
