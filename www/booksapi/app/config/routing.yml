@@ -1,3 +1,10 @@
 app:
     resource: '@AppBundle/Controller/'
     type: annotation
+api_with_prefix:
+    type: rest
+    prefix: /api/{version}
+#    requirements:
+#        version:  latest|v1|v2
+#    name_prefix:  api_
+    resource:     '@AppBundle/Controller/Api/'
