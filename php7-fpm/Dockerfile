@@ -25,6 +25,12 @@ RUN echo "xdebug.remote_connect_back=1" >> /usr/local/etc/php/conf.d/docker-php-
 RUN echo "xdebug.idekey=\"PHPSTORM\"" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
 RUN echo "xdebug.remote_port=9001" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
 
+# Install extensions
+RUN docker-php-ext-install mbstring
+RUN docker-php-ext-enable mbstring
+RUN docker-php-ext-install bcmath
+RUN docker-php-ext-enable bcmath
+
 # Create an alias for Symfony3 console
 RUN echo 'alias symfony="php bin/console"' >> ~/.bashrc
 
