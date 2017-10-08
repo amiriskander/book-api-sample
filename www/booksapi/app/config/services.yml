@@ -16,11 +16,26 @@ services:
 
     # makes classes in src/AppBundle available to be used as services
     # this creates a service per class whose id is the fully-qualified class name
-    AppBundle\:
-        resource: '../../src/AppBundle/*'
-        # you can exclude directories or files
-        # but if a service is unused, it's removed anyway
-        exclude: '../../src/AppBundle/{Entity,Repository,Tests}'
+    #AppBundle\:
+    #    resource: '../../src/AppBundle/*'
+    #    # you can exclude directories or files
+    #    # but if a service is unused, it's removed anyway
+    #    exclude: '../../src/AppBundle/{Entity,Repository,Tests}'
+
+    AppBundle\Service\Rabbitmq:
+        resource: '../../src/AppBundle/Service/Rabbitmq'
+        autowire: true
+        public: true
+        arguments:
+            $someArgument: 'some_value'
+
+    AppBundle\Service\:
+        resource: '../../src/AppBundle/Service'
+        autowire: true
+        public: true
+
+#    AppBundle\Service:
+#        resource: '../../src/AppBundle/Service/*'
 
     # controllers are imported separately to make sure they're public
     # and have a tag that allows actions to type-hint services
