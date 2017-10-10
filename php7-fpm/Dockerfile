@@ -30,6 +30,7 @@ RUN docker-php-ext-install mbstring
 RUN docker-php-ext-enable mbstring
 RUN docker-php-ext-install bcmath
 RUN docker-php-ext-enable bcmath
+RUN docker-php-ext-install sockets
 
 # Create an alias for Symfony3 console
 RUN echo 'alias symfony="php bin/console"' >> ~/.bashrc
