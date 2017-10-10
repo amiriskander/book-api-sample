@@ -2,8 +2,6 @@
 
 namespace AppBundle\Controller\Api;
 
-use AppBundle\Producer\CreateBookProducer;
-use AppBundle\Service\Rabbitmq;
 use FOS\RestBundle\Controller\FOSRestController;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -21,6 +19,7 @@ class BookController extends FOSRestController
     public function createAction(Request $request)
     {
         $bookData = $request->request->all();
+
 //        dump($bookData);
 //        die;
         // $this->container->get('\AppBundle\Service\Rabbitmq')->enqueue($bookData);
@@ -28,7 +27,7 @@ class BookController extends FOSRestController
 
         // dump( class_exists(CreateBookProducer::class) ); die;
 
-        $this->get( CreateBookProducer::class )->enqueue(serialize($bookData));
+        $this->get('create_book')->enqueue(serialize($bookData));
 
         die;
 

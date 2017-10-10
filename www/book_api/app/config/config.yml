@@ -13,7 +13,7 @@ framework:
     #translator: { fallbacks: ['%locale%'] }
     secret: '%secret%'
     router:
-        resource: '%kernel.project_dir%/app/config/routing.yml'
+        resource: '%kernel.root_dir%/config/routing.yml'
         strict_requirements: ~
     form: ~
     csrf_protection: ~
@@ -23,15 +23,12 @@ framework:
         engines: ['twig']
     default_locale: '%locale%'
     trusted_hosts: ~
+    trusted_proxies: ~
     session:
-        # https://symfony.com/doc/current/reference/configuration/framework.html#handler-id
-        handler_id: session.handler.native_file
-        save_path: '%kernel.project_dir%/var/sessions/%kernel.environment%'
+        # handler_id set to null will use default session handler from php.ini
+        handler_id: ~
     fragments: ~
     http_method_override: true
-    assets: ~
-    php_errors:
-        log: true
 
 # Twig Configuration
 twig:
@@ -50,7 +47,7 @@ doctrine:
         charset: UTF8
         # if using pdo_sqlite as your database driver:
         #   1. add the path in parameters.yml
-        #     e.g. database_path: '%kernel.project_dir%/var/data/data.sqlite'
+        #     e.g. database_path: '%kernel.root_dir%/data/data.db3'
         #   2. Uncomment database_path in parameters.yml.dist
         #   3. Uncomment next line:
         #path: '%database_path%'
@@ -111,33 +108,33 @@ old_sound_rabbit_mq:
             port:     5672
             user:     'rabbit'
             password: 'mq'
-            vhost:    '/'
+            vhost:    '/default'
             lazy:     false
             connection_timeout: 3
             read_write_timeout: 3
 
             # requires php-amqplib v2.4.1+ and PHP5.4+
-            keepalive: false
+            # keepalive: false
 
             # requires php-amqplib v2.4.1+
-            heartbeat: 0
+            # heartbeat: 0
 
             #requires php_sockets.dll
             use_socket: true # default false
-        another:
-            # A different (unused) connection defined by an URL. One can omit all parts,
-            # except the scheme (amqp:). If both segment in the URL and a key value (see above)
-            # are given the value from the URL takes precedence.
-            # See https://www.rabbitmq.com/uri-spec.html on how to encode values.
-            url: 'amqp://rabbit:mq@localhost:5672/vhost?lazy=1&connection_timeout=6'
+#        another:
+#            # A different (unused) connection defined by an URL. One can omit all parts,
+#            # except the scheme (amqp:). If both segment in the URL and a key value (see above)
+#            # are given the value from the URL takes precedence.
+#            # See https://www.rabbitmq.com/uri-spec.html on how to encode values.
+#            url: 'amqp://rabbit:mq@localhost:5672/vhost?lazy=1&connection_timeout=6'
     producers:
         create_book:
             connection:       default
             exchange_options: {name: 'create_book', type: direct}
             # service_alias:    my_app_service # no alias by default
-    consumers:
-        create_book:
-            connection:       default
-            exchange_options: {name: 'create_book', type: direct}
-            queue_options:    {name: 'create_book'}
-            callback:         upload_picture_service
+#    consumers:
+#        create_book:
+#            connection:       default
+#            exchange_options: {name: 'create_book', type: direct}
+#            queue_options:    {name: 'create_book'}
+#            callback:         upload_picture_service
