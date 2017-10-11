@@ -104,20 +104,20 @@ fos_rest:
 old_sound_rabbit_mq:
     connections:
         default:
-            host:     'localhost'
+            host:     'rabbit'
             port:     5672
             user:     'rabbit'
             password: 'mq'
-            vhost:    '/default'
-            lazy:     false
+            vhost:    '/'
+            lazy:     true
             connection_timeout: 3
             read_write_timeout: 3
 
             # requires php-amqplib v2.4.1+ and PHP5.4+
-            # keepalive: false
+            keepalive: false
 
             # requires php-amqplib v2.4.1+
-            # heartbeat: 0
+            heartbeat: 0
 
             #requires php_sockets.dll
             use_socket: true # default false
@@ -126,7 +126,7 @@ old_sound_rabbit_mq:
 #            # except the scheme (amqp:). If both segment in the URL and a key value (see above)
 #            # are given the value from the URL takes precedence.
 #            # See https://www.rabbitmq.com/uri-spec.html on how to encode values.
-#            url: 'amqp://rabbit:mq@localhost:5672/vhost?lazy=1&connection_timeout=6'
+#            url: 'amqp://rabbit:mq@rabbit:5672/vhost?lazy=1&connection_timeout=6'
     producers:
         create_book:
             connection:       default

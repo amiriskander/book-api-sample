@@ -27,7 +27,8 @@ class BookController extends FOSRestController
 
         // dump( class_exists(CreateBookProducer::class) ); die;
 
-        $this->get('create_book')->enqueue(serialize($bookData));
+        // $this->get('create_book')->enqueue(serialize($bookData));
+        $this->get('old_sound_rabbit_mq.create_book_producer')->publish(serialize($bookData));
 
         die;
 
