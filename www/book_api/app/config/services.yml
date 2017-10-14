@@ -8,7 +8,8 @@ services:
     #    class: AppBundle\Directory\ClassName
     #    arguments: ['@another_service_name', 'plain_value', '%parameter_name%']
 
-    create_book:
-        class: AppBundle\Producer\CreateBookProducer
-        arguments:
-            - @old_sound_rabbit_mq.create_book_producer
+#    old_sound_rabbit_mq.create_book_producer:
+#    #create_book:
+#        class: AppBundle\Producer\CreateBookProducer
+#        arguments:
+#            - @old_sound_rabbit_mq.create_book_producer
