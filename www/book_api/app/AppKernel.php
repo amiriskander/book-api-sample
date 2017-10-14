@@ -18,8 +18,8 @@ class AppKernel extends Kernel
             new FOS\RestBundle\FOSRestBundle(),
             new JMS\SerializerBundle\JMSSerializerBundle(),
             new Nelmio\CorsBundle\NelmioCorsBundle(),
-            new OldSound\RabbitMqBundle\OldSoundRabbitMqBundle(),
-            new FOS\ElasticaBundle\FOSElasticaBundle(),
+            // new OldSound\RabbitMqBundle\OldSoundRabbitMqBundle(),
+            // new FOS\ElasticaBundle\FOSElasticaBundle(),
             new AppBundle\AppBundle(),
         );
 
