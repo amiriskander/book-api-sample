@@ -39,24 +39,35 @@ services:
             - php
         volumes:
             - ./logs/nginx/:/var/log/nginx
-    elk:
-        container_name: container_elk
-        # image: sebp/elk
-        # image: carlosas/elk-5x
-        image: willdurand/elk
-        ports:
-            - 81:80
-        volumes:
-            - ./elk/logstash:/etc/logstash
-            - ./elk/logstash/patterns:/opt/logstash/patterns
-        volumes_from:
-            - php
-            - nginx
+#    elk:
+#        container_name: container_elk
+#        # image: sebp/elk
+#        # image: carlosas/elk-5x
+#        # image: willdurand/elk
+#        image: elasticsearch
+#        ports:
+#            - 81:80
+#        volumes:
+#            - ./elk/logstash:/etc/logstash
+#            - ./elk/logstash/patterns:/opt/logstash/patterns
+#        volumes_from:
+#            - php
+#            - nginx
 #    phpmyadmin:
 #        container_name: container_phpmyadmin
 #        image: phpmyadmin/phpmyadmin
 #        ports:
 #            - "8080:80"
+
+    elastic:
+        container_name: container_elastic
+        image: elasticsearch
+        ports:
+            - 9200:9200
+            - 9300:9300
+        volumes_from:
+            - php
+            - nginx
     rabbit:
         container_name: container_rabbit
         hostname: rabbit
