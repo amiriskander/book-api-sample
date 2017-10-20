@@ -67,6 +67,7 @@ class CreateBookConsumer
     public function process(AMQPMessage $msg)
     {
         // $this->generatePdf()->sendEmail();
+        dump($msg);
 
         $params = [
             'index' => 'books',

@@ -3,6 +3,7 @@
 namespace AppBundle\Controller\Api;
 
 use AppBundle\Consumer\CreateBookConsumer;
+use AppBundle\Document\Book;
 use AppBundle\Producer\CreateBookProducer;
 use FOS\RestBundle\Controller\FOSRestController;
 use FOS\RestBundle\Controller\Annotations as Rest;
@@ -61,13 +62,33 @@ class BookController extends FOSRestController
     }
 
     /**
-     * @Rest\Get("/search", name="book_api_search")
+     * @Rest\Get("/insert", name="book_api_insert")
      */
-    public function searchAction(Request $request)
+    public function insertAction(Request $request)
     {
-        $consumer = new CreateBookConsumer();
-        $consumer->listen();
-        die;
+//        $consumer = new CreateBookConsumer();
+//        $consumer->listen();
+//        die;
+        $book = new Book();
+        $book->setName('Test Book 001');
+        $book->setAuthor('Amir Iskander');
+        $book->setYear(2012);
+        $book->setIsbn('1231231231231');
+
+        $manager = $this->get('es.manager');
+        // $repo = $manager->getRepository('AppBundle:Book');
+        // $repo = $this->get('es.manager.default.book');
+        $manager->persist($book);
+        $manager->commit();
+
+
+
+
+
+        // dump($book); die;
+//        $em = $this->getDoctrine()->getManager();
+//        $em->persist($book);
+//        $em->flush();
 //        $finder = $this->get('foq_elastica.finder.library.book');
 //        // $searchTerm = $request->query->get('search');
 //        $searchTerm = 'Amir';
