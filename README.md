@@ -1,8 +1,11 @@
-# Complete Docker stack for Symfony 3
+# Sample Book API
+
+Sample RESTful API that has uses RabbitMQ as a message queue with 1 queue for book creation with 1 producer and 1 consumer and saves book data to ElasticSearch Edit
+
 
 [![license](https://img.shields.io/github/license/mashape/apistatus.svg?style=flat-square)](LICENSE)
-[![contributions](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat-square)](https://github.com/carlosas/docker-for-symfony/issues)
-[![HitCount](http://hits.dwyl.com/carlosas/docker-for-symfony.svg)](http://hits.dwyl.com/carlosas/docker-for-symfony)
+[![contributions](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat-square)](https://github.com/amiriskander/book-api-sample/issues)
+[![HitCount](http://hits.dwyl.com/amiriskander/book-api-sample.svg)](http://hits.dwyl.com/amiriskander/book-api-sample)
 
 ![](doc/schema.png)
 
