@@ -4,7 +4,6 @@ Sample RESTful API that has uses RabbitMQ as a message queue with 1 queue for bo
 
 
 [![license](https://img.shields.io/github/license/mashape/apistatus.svg?style=flat-square)](LICENSE)
-[![contributions](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat-square)](https://github.com/amiriskander/book-api-sample/issues)
 [![HitCount](http://hits.dwyl.com/amiriskander/book-api-sample.svg)](http://hits.dwyl.com/amiriskander/book-api-sample)
 
 ![](doc/schema.png)
@@ -13,11 +12,7 @@ Sample RESTful API that has uses RabbitMQ as a message queue with 1 queue for bo
 
 * [nginx](https://nginx.org/)
 * [PHP-FPM](https://php-fpm.org/)
-* [MySQL](https://www.mysql.com/)
-* [Redis](https://redis.io/)
 * [Elasticsearch](https://www.elastic.co/products/elasticsearch)
-* [Logstash](https://www.elastic.co/products/logstash)
-* [Kibana](https://www.elastic.co/products/kibana)
 * [RabbitMQ](https://www.rabbitmq.com/)
 
 ## Previous requirements
@@ -82,11 +77,9 @@ Running `docker-compose ps` should result in the following running containers:
 ```
            Name                          Command               State              Ports
 --------------------------------------------------------------------------------------------------
-container_mysql         /entrypoint.sh mysqld            Up      0.0.0.0:3306->3306/tcp
-container_elk           /usr/bin/supervisord -n -c ...   Up      0.0.0.0:81->80/tcp
+container_elastic                                        Up      0.0.0.0:9200->9200/tcp
 container_nginx         nginx                            Up      443/tcp, 0.0.0.0:80->80/tcp
 container_phpfpm        php-fpm                          Up      0.0.0.0:9000->9000/tcp
-container_redis         docker-entrypoint.sh redis ...   Up      6379/tcp
 container_rabbit        rabbitmq:3-management            Up      4369/tcp, 5671/tcp, 0.0.0.0:5672->5672/tcp, 15671/tcp, 25672/tcp, 0.0.0.0:15672->15672
 ```
 
@@ -95,10 +88,10 @@ container_rabbit        rabbitmq:3-management            Up      4369/tcp, 5671/
 Once all the containers are up, our services are available at:
 
 * Symfony app: [symfony.dev](http://symfony.dev)
-* Kibana: [symfony.dev:81](http://symfony.dev:81)
+* ElasticSearch: [symfony.dev:9200](http://symfony.dev:9200)
 * RabbitMQ: [symfony.dev:15672](http://symfony.dev:15672)
 * Log files location: *logs/nginx* and *logs/symfony*
 
 ---
 
-:notebook: More information and useful stuff in the [wiki](https://github.com/carlosas/full-docker-for-symfony-3/wiki).
+:notebook: Base docker container set was forked from [here](https://github.com/carlosas/full-docker-for-symfony-3/).
