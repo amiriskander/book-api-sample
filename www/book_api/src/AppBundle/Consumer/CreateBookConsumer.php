@@ -67,7 +67,9 @@ class CreateBookConsumer
     public function process(AMQPMessage $msg)
     {
         // $this->generatePdf()->sendEmail();
-        dump($msg);
+        dump($msg); die;
+
+        // @TODO create and use factory class that implements an interface that can store msg i.e. elastic search
 
         $params = [
             'index' => 'books',
@@ -88,34 +90,5 @@ class CreateBookConsumer
          */
         $msg->delivery_info['channel']->basic_ack($msg->delivery_info['delivery_tag']);
         dump($response);
-    }
-
-    /**
-     * Generates invoice's pdf
-     *
-     * @return CreateBookConsumer
-     */
-    private function generatePdf()
-    {
-        /**
-         * Mocking a pdf generation processing time.  This will take between
-         * 2 and 5 seconds
-         */
-        sleep(mt_rand(2, 5));
-        return $this;
-    }
-
-    /**
-     * Sends email
-     *
-     * @return CreateBookConsumer
-     */
-    private function sendEmail()
-    {
-        /**
-         * Mocking email sending time.  This will take between 1 and 3 seconds
-         */
-        sleep(mt_rand(1, 3));
-        return $this;
     }
 }

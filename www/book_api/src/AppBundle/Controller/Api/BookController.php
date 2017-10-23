@@ -22,38 +22,7 @@ class BookController extends FOSRestController
      */
     public function createAction(Request $request)
     {
-        /*$params = array(
-            'host' => 'rabbit',
-            'port' => 5672,
-            'username' => 'rabbit',
-            'password' => 'mq',
-            'vhost' => '/'
-        );
-
-        $connection = new AMQPConnection(
-            $params['host'],
-            $params['port'],
-            $params['username'],
-            $params['password'],
-            $params['vhost']
-        );
-
-        dump($connection->isConnected());
-
-        dump($connection); die;*/
-
         $bookData = $request->request->all();
-
-//        dump($bookData);
-//        die;
-        // $this->container->get('\AppBundle\Service\Rabbitmq')->enqueue($bookData);
-        // $this->container->get(Rabbitmq::class)->enqueue($bookData);
-
-        // dump( class_exists(CreateBookProducer::class) ); die;
-
-        // $this->get('create_book')->enqueue(serialize($bookData));
-        // $this->get('old_sound_rabbit_mq.create_book_producer')->publish(serialize($bookData));
-
         $producer = new CreateBookProducer();
         $producer->enqueue($bookData);
 
@@ -66,9 +35,11 @@ class BookController extends FOSRestController
      */
     public function insertAction(Request $request)
     {
-//        $consumer = new CreateBookConsumer();
-//        $consumer->listen();
-//        die;
+        $consumer = new CreateBookConsumer();
+        $consumer->listen();
+        die;
+
+
         $book = new Book();
         $book->setName('Test Book 001');
         $book->setAuthor('Amir Iskander');
@@ -80,20 +51,5 @@ class BookController extends FOSRestController
         // $repo = $this->get('es.manager.default.book');
         $manager->persist($book);
         $manager->commit();
-
-
-
-
-
-        // dump($book); die;
-//        $em = $this->getDoctrine()->getManager();
-//        $em->persist($book);
-//        $em->flush();
-//        $finder = $this->get('foq_elastica.finder.library.book');
-//        // $searchTerm = $request->query->get('search');
-//        $searchTerm = 'Amir';
-//        $sites = $finder->find($searchTerm);
-//        dump($sites); die;
-//        return array('sites' => $sites);
     }
 }
